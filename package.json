@@ -1,0 +1,24 @@
+{
+  "name": "furnater",
+  "version": "1.0.0",
+  "description": "Furnater is a style-tool generatow, that allows convert css inline class names to declaration or generate dynamical dependency styles",
+  "main": "index.js",
+  "scripts": {
+    "run": "ts-node main.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Syling",
+    "CSS"
+  ],
+  "author": "Grano22 Dev",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^16.7.10",
+    "@types/reflect-metadata": "^0.1.0"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^10.2.1"
+  }
+}

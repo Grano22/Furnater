@@ -1,0 +1,19 @@
+[
+    {
+        "method":"fullname",
+        "keywords":[
+            "d-p",
+            "display-block"
+        ],
+        "replaceTarget":"display-block",
+        "styleRules":[{"display": "block"}]
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["m"],
+            "notation":["px", "em", "rem"],
+            "defaultNotation":"px"
+        }
+    }
+]
