@@ -12,7 +12,7 @@ export default class FullnameMethod implements RulesetMapMethodInterface {
     replaceTarget : string = "";
 
     @RulesetMappedParam()
-    styleRules : Record<string, string> = {};
+    styleRules : Record<string, string> = null;
 
     constructor(
         fgb : FurnaterGrabber
@@ -25,10 +25,6 @@ export default class FullnameMethod implements RulesetMapMethodInterface {
     }
 
     public register() {
-
-    }
-    
-    public resolve() {
 
     }
 

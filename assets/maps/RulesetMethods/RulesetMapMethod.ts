@@ -19,11 +19,18 @@ export const RulesetMap = (config : Record<string, any> = {}) /*: ClassDecorator
 
             #id : number = 0;
 
-            public resolve() {
-                return {
+            /**
+             * Resolve rules to css
+             * @return {Record<string, string>}
+             */
+            public resolve() : Record<string, string> {
+                if(typeof this["styleRules"]==="object" && this["styleRules"]!==null) return this["styleRules"];
+                else if(typeof this["resolveRules"]==="function") return this["resolveRules"]();
+                else return {};
+                /*return {
                     selector:this.resolveSelector(),
                     rules:this.resolveRules()
-                };
+                };*/
            }
         }
     };

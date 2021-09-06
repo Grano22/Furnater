@@ -47,7 +47,12 @@ class Furnater {
         this.#modelLoader.assignModel(furnaterModel!==null ? furnaterModel : standardModel);
     }
 
+    /**
+     * Automatic mode to resolve stylesheet
+     */
+    autoProcess() {
 
+    }
 
     /**
      * Exception custom resolver
