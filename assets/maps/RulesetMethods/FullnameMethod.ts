@@ -1,14 +1,22 @@
 import FurnaterGrabber from "../../FurnaterGrabber";
-import RulesetMapMethod, { RulesetMap, RulesetMappedParam } from "./RulesetMapMethod";
+import { RulesetMap, RulesetMapMethodInterface, RulesetMappedParam } from "./RulesetMapMethod";
 
-@RulesetMap()
-export default class FullnameMethod {
-    name = "fullname";
+@RulesetMap({
+    name:"fullname"
+})
+export default class FullnameMethod implements RulesetMapMethodInterface {
+    @RulesetMappedParam()
+    keywords : string[] = [];
 
     @RulesetMappedParam()
-    keyword : string = "";
+    replaceTarget : string = "";
 
-    constructor(fgb : FurnaterGrabber) {
+    @RulesetMappedParam()
+    styleRules : Record<string, string> = {};
+
+    constructor(
+        fgb : FurnaterGrabber
+    ) {
         
     }
 
@@ -21,8 +29,11 @@ export default class FullnameMethod {
     }
     
     public resolve() {
-        
+
+    }
+
+    public detectClass(targetClass) : boolean {
+        let conclusion = this.keywords.includes(targetClass);
+        return conclusion;
     }
 }
-
-console.log('flnamemeth', FullnameMethod);

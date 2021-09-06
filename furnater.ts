@@ -3,12 +3,13 @@
  * @version 1.0.0
  */
 import 'reflect-metadata';
-import RulesetMapMethod from "./assets/maps/RulesetMethods/RulesetMapMethod";
 import FurnaterCriticalError from "./assets/exceptions/FurnaterCriticalError";
 import FurnaterConfigurator from "./assets/configuration/Configurator";
 import FurnaterRulesetModel, { standardModel, standardModelID } from './assets/maps/RulesetModels/FurnaterRulesetModel';
 import FurnaterRulesetModelLoader from './assets/maps/RulesetModels/FurnaterRulesetModelLoader';
 import FurnaterInnerFasade from './assets/fasade/FurnaterInnerFasade';
+import FurnaterRulesetLoader from './assets/FurnaterRulesetLoader';
+import path from 'path/posix';
 
 type ErrorCB = (err : Error | FurnaterCriticalError)=>void;
 
@@ -16,8 +17,14 @@ interface FurnaterOptions {
 
 }
 
+interface FurnaterRuleset {
+    [key: string] : any;
+}
+
 class Furnater {
     #modelLoader = null;
+    #ruleSetLoader = null;
+    #ruleSet = null;
     #exceptions = [];
     #excCaller : ErrorCB[] = [];
     #config = null;
@@ -25,14 +32,22 @@ class Furnater {
     /**
      * @since 1.0.0
      */
-    constructor(options : FurnaterOptions = null, furnaterModel : FurnaterRulesetModel = null) {
+    constructor(options : FurnaterOptions = null, furnaterRuleset : FurnaterRuleset = null, furnaterModel : FurnaterRulesetModel = null) {
         this.#config = new FurnaterConfigurator({
 
         });
         if(options!==null) this.configure(options);
-        this.#modelLoader = new FurnaterRulesetModelLoader(this.#buildFasade());
+        const innerFas = this.#buildFasade();
+        this.#modelLoader = new FurnaterRulesetModelLoader(innerFas);
+        this.#ruleSetLoader = new FurnaterRulesetLoader(innerFas);
+        this.#ruleSet = furnaterRuleset || path.join(__dirname, "data", "rules.json");
+        this.#modelLoader.onChange = ((changed) => {
+            this.#ruleSetLoader.assignSet(changed, this.#ruleSet);
+        }).bind(this);
         this.#modelLoader.assignModel(furnaterModel!==null ? furnaterModel : standardModel);
     }
+
+
 
     /**
      * Exception custom resolver

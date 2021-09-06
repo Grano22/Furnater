@@ -1,9 +1,9 @@
 import { RulesetMap, RulesetMappedParam } from "./RulesetMapMethod";
 
-@RulesetMap()
+@RulesetMap({
+    name:"type-value-notation"
+})
 export default class TypeValueNotationMethod {
-    name = "type-value-notation";
-
     @RulesetMappedParam()
     keyword : string = "";
 

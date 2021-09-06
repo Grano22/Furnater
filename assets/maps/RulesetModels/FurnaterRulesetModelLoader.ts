@@ -1,26 +1,31 @@
 import FurnaterCriticalError from "../../exceptions/FurnaterCriticalError";
 import FurnaterInnerFasade from "../../fasade/FurnaterInnerFasade";
-import RulesetMapMethod from "../RulesetMethods/RulesetMapMethod";
 import { standardModelID } from "./FurnaterRulesetModel";
 
 export default class FurnaterRulesetModelLoader {
     #furFas = null;
     #rulesModel = null;
+    #changeDetect = [];
 
     constructor(furnFas : FurnaterInnerFasade) {
         this.#furFas = furnFas;
     }
 
+    set onChange(cb : ()=>void) {
+        this.#changeDetect.push(cb);
+    }
+
     /**
-     * Assugn model to furnater loader
+     * Assign model to furnater loader
      * @param declModel 
      */
     assignModel(declModel) : void {
         try {
-            let rulesMethods = [];
+            let rulesMethods = new Map<string, any>();
             if(!this.#vaidateModel(declModel)) throw new FurnaterCriticalError("Given model is not a vaild");
-            for(let declMethod of declModel.methods) rulesMethods.push(declMethod);
+            for(let declMethod of declModel.methods) rulesMethods.set(declMethod.typeDef, declMethod);
             this.#rulesModel = rulesMethods;
+            this.#emitChange();
         } catch(err) {
             this.#furFas.passException(err);
         }
@@ -40,5 +45,9 @@ export default class FurnaterRulesetModelLoader {
         } catch(err) {
             return false;
         }
+    }
+
+    #emitChange() {
+        for(const chng of this.#changeDetect) if(typeof chng==="function") chng(this.#rulesModel);
     }
 }

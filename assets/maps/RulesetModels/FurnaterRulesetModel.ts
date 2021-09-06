@@ -1,5 +1,4 @@
 import FullnameMethod from "../RulesetMethods/FullnameMethod";
-import RulesetMapMethod from "../RulesetMethods/RulesetMapMethod";
 import TypeValueNotationMethod from "../RulesetMethods/TypeValueNotationMethod";
 
 export default interface FurnaterRulesetModel {
