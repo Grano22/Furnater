@@ -10,6 +10,7 @@ import FurnaterRulesetModelLoader from './assets/maps/RulesetModels/FurnaterRule
 import FurnaterInnerFasade from './assets/fasade/FurnaterInnerFasade';
 import FurnaterRulesetLoader from './assets/FurnaterRulesetLoader';
 import path from 'path/posix';
+import FurnaterResolver, { FurnaterResolverOptions } from './assets/FurnaterResolver';
 
 type ErrorCB = (err : Error | FurnaterCriticalError)=>void;
 
@@ -50,8 +51,10 @@ class Furnater {
     /**
      * Automatic mode to resolve stylesheet
      */
-    autoProcess() {
-
+    autoProcess(options : FurnaterResolverOptions = {}) {
+        const fr = new FurnaterResolver(this.#ruleSetLoader.loaded, options);
+        fr.resolveAllAuto();
+        return fr;
     }
 
     /**

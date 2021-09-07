@@ -12,7 +12,8 @@
         "method":"type-value-notation",
         "parts":{
             "type":["m"],
-            "notation":["px", "em", "rem"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
             "defaultNotation":"px"
         }
     }

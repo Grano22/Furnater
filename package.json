@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "run": "ts-node main.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_ENV=test mocha -r ts-node/register --ui bdd \"./tests/**/*.test.{js,jsx,ts,tsx}\"",
+    "single": "mocha \"tests/**/*.js\""
   },
   "keywords": [
     "Syling",
@@ -14,6 +15,8 @@
   "author": "Grano22 Dev",
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^27.0.1",
+    "@types/mocha": "^9.0.0",
     "@types/node": "^16.7.10",
     "@types/reflect-metadata": "^0.1.0",
     "chai": "^4.3.4",
@@ -21,6 +24,7 @@
   },
   "dependencies": {
     "dom-parser": "^0.1.6",
+    "nyc": "^15.1.0",
     "reflect-metadata": "^0.1.13",
     "ts-node": "^10.2.1"
   }

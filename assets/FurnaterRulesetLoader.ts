@@ -8,6 +8,10 @@ export default class FurnaterRulesetLoader {
     #loaded = [];
     #furFas = null;
 
+    get loaded() {
+        return this.#loaded;
+    }
+
     /**
      * @since 1.0.0
      */

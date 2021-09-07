@@ -32,6 +32,16 @@ export const RulesetMap = (config : Record<string, any> = {}) /*: ClassDecorator
                     rules:this.resolveRules()
                 };*/
            }
+
+           /**
+            * Detect resolver by class
+            * @param className 
+            * @returns 
+            */
+           public detectByClass(className : string) : boolean {
+               if(typeof this["detectClass"]==="function") return this["detectClass"](className);
+               else return false;
+           }
         }
     };
 };

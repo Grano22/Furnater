@@ -28,7 +28,7 @@ export default class FullnameMethod implements RulesetMapMethodInterface {
 
     }
 
-    public detectClass(targetClass) : boolean {
+    public detectClass(targetClass : string) : boolean {
         let conclusion = this.keywords.includes(targetClass);
         return conclusion;
     }

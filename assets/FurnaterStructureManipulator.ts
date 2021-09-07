@@ -1,13 +1,3 @@
-export default class FurneterStructureMamipulator {
-    #loadedDoc
-    
-    loadDoc() {
-
-    }
-
-    findAllClasses() {
-
-    }
-
-
+export default abstract class FurnaterStructureManipulator {
+    public abstract getAllClasses();
 }

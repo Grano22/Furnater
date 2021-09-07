@@ -6,9 +6,9 @@
         "experimentalDecorators":true,
         "emitDecoratorMetadata": true,
         "moduleResolution": "node",
-        "types": ["node"],
+        "types": ["node", "mocha"],
         "lib": ["es6"],
         "resolveJsonModule": true,
-        "strict": false
+        "strict": false,
     }
 }
