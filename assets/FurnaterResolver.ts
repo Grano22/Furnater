@@ -8,6 +8,7 @@ export interface FurnaterResolverOptions {
 }
 
 export default class FurnaterResolver {
+    #options : FurnaterResolverOptions = {};
     #stage = null;
     #loaded = "";
     #structureManipulator = null;
@@ -15,6 +16,7 @@ export default class FurnaterResolver {
     #classDefinitions = {};
 
     constructor(rulesetStage, options : FurnaterResolverOptions = {}) {
+        this.#options = options;
         this.#stage = rulesetStage;
         if(typeof options.htmlFile==="string") this.#loaded = FileIO.loadFromFile(options.htmlFile);
     }
@@ -34,11 +36,15 @@ export default class FurnaterResolver {
             for(const classOnce of className.split(" ")) {
                 const classResolv = this.getClassResolver(classOnce);
                 if(classResolv!==null) {
-                    console.log('resolv', classOnce, classResolv);
+                    //console.log('resolv', classOnce, classResolv);
+                    const replClass = classResolv.replaceTo(classOnce);
+                    const stRul = classResolv.resolve(classOnce);
+                    this.#classDefinitions[replClass] = stRul;
+                    console.log(stRul);
                 }
             }
         }
-        //this.stringify()
+        FileIO.saveToFile(this.#options.cssFile, this.stringify());
     }
 
     getClassResolver(targetClass : string) {
@@ -48,19 +54,28 @@ export default class FurnaterResolver {
         return null;
     }
 
+    /**
+     * Stringify defs
+     * @param minified 
+     * @returns 
+     */
     stringify(minified = false) : string {
-        let fStr = "";
+        let fStr = "", iter = 0;
+        const totalDefs = Object.keys(this.#classDefinitions).length;
         for(let defSelector in this.#classDefinitions) {
             fStr += "."+defSelector + " {";
             if(!minified)  fStr += "\n";
+            let itor = 0; const totalRules = Object.keys(this.#classDefinitions[defSelector]).length;
             for(let ruleName in this.#classDefinitions[defSelector]) {
                 if(!minified) fStr += "\t";
-                fStr += ruleName + " = " + this.#classDefinitions[defSelector][ruleName] + ";";
-                if(!minified) fStr += "\n";
+                fStr += ruleName + ": " + this.#classDefinitions[defSelector][ruleName] + ";";
+                if(!minified && totalRules-1>itor) fStr += "\n";
+                itor++;
             }
             if(!minified) fStr += "\n";
             fStr += "}";
-            if(!minified) fStr += "\n";
+            if(!minified && totalDefs-1>iter) fStr += "\n";
+            iter++;
         }
         return fStr;
     }

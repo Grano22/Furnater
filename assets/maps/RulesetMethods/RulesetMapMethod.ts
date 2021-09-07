@@ -23,9 +23,9 @@ export const RulesetMap = (config : Record<string, any> = {}) /*: ClassDecorator
              * Resolve rules to css
              * @return {Record<string, string>}
              */
-            public resolve() : Record<string, string> {
+            public resolve(targetClass : string) : Record<string, string> {
                 if(typeof this["styleRules"]==="object" && this["styleRules"]!==null) return this["styleRules"];
-                else if(typeof this["resolveRules"]==="function") return this["resolveRules"]();
+                else if(typeof this["resolveRules"]==="function") return this["resolveRules"](targetClass);
                 else return {};
                 /*return {
                     selector:this.resolveSelector(),
@@ -41,6 +41,15 @@ export const RulesetMap = (config : Record<string, any> = {}) /*: ClassDecorator
            public detectByClass(className : string) : boolean {
                if(typeof this["detectClass"]==="function") return this["detectClass"](className);
                else return false;
+           }
+
+           /**
+            * Replace class to
+            * @param targetClass 
+            */
+           public replaceTo(targetClass : string) : string {
+                if(typeof this["replaceTarget"]==="string") return this["replaceTarget"];
+                else return targetClass;
            }
         }
     };

@@ -6,7 +6,7 @@
             "display-block"
         ],
         "replaceTarget":"display-block",
-        "styleRules":[{"display": "block"}]
+        "styleRules":{"display": "block"}
     },
     {
         "method":"type-value-notation",
@@ -15,6 +15,41 @@
             "notation":["px", "em", "rem", ""],
             "separators":["-"],
             "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "margin":"%v%n"
+            }
+        }
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["my"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "margin-top":"%v%n",
+                "margin-bottom":"%v%n"
+            }
+        }
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["mx"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "margin-left":"%v%n",
+                "margin-right":"%v%n"
+            }
         }
     }
 ]

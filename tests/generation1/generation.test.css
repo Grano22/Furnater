@@ -1,0 +1,14 @@
+.my-2 {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+.display-block {
+	display: block;
+}
+.mx-2 {
+	margin-left: 2px;
+	margin-right: 2px;
+}
+.m-4em {
+	margin: 4em;
+}

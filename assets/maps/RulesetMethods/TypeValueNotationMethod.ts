@@ -14,6 +14,9 @@ export default class TypeValueNotationMethod {
     @RulesetMappedParam()
     parts : TVNMParts = null;
 
+    @RulesetMappedParam()
+    binds : Record<string, Record<string, any>> = {};
+
     public boot() {
 
     }
@@ -22,12 +25,27 @@ export default class TypeValueNotationMethod {
 
     }
     
-    public resolve() {
-        
+    public resolveRules(targetClass : string) {
+       const params = this.prepareParams(targetClass), currBind = "default", resolv = {};
+        for(let bindKey in this.binds[currBind]) {
+            resolv[bindKey] = this.binds[currBind][bindKey].replace(/%v/ig, params.value).replace(/%n/ig, params.notation);
+        }
+        return resolv;
     }
 
     public detectClass(targetClass : string) : boolean {
         return new RegExp(this.buildRegexp()).test(targetClass);
+    }
+
+    private prepareParams(targetClass : string) {
+        let lastV = 2, val;
+        const params = new RegExp(this.buildRegexp()).exec(targetClass);
+        if(!isNaN(parseInt(params[1]))) val = params[lastV]; else val = params[++lastV];
+        return {
+            type:params[1],
+            value:val,
+            notation:params[lastV+1] || this.parts.defaultNotation
+        }
     }
 
     private buildRegexp() : string {
@@ -38,7 +56,7 @@ export default class TypeValueNotationMethod {
             if(Array.isArray(this.parts.separators)) {
                 rgxp += "(" + this.parts.separators.join("|") + ")";
             }
-            rgxp += '(\\d+)';
+            rgxp += '([0-9.]+)'; //\\d+
             if(Array.isArray(this.parts.notation)) {
                 rgxp += "(" + this.parts.notation.join("|") + ")";
             }
