@@ -36,15 +36,15 @@ export default class FurnaterResolver {
             for(const classOnce of className.split(" ")) {
                 const classResolv = this.getClassResolver(classOnce);
                 if(classResolv!==null) {
-                    //console.log('resolv', classOnce, classResolv);
                     const replClass = classResolv.replaceTo(classOnce);
+                    if(classOnce!==replClass) this.#structureManipulator.replaceAll(classOnce, replClass);
                     const stRul = classResolv.resolve(classOnce);
                     this.#classDefinitions[replClass] = stRul;
-                    console.log(stRul);
                 }
             }
         }
         FileIO.saveToFile(this.#options.cssFile, this.stringify());
+        FileIO.saveToFile(this.#options.htmlFile, this.#structureManipulator.content);
     }
 
     getClassResolver(targetClass : string) {

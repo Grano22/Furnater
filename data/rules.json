@@ -40,6 +40,34 @@
     {
         "method":"type-value-notation",
         "parts":{
+            "type":["mt"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "margin-top":"%v%n"
+            }
+        }
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["mb"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "margin-bottom":"%v%n"
+            }
+        }
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
             "type":["mx"],
             "notation":["px", "em", "rem", ""],
             "separators":["-"],
@@ -49,6 +77,134 @@
             "default":{
                 "margin-left":"%v%n",
                 "margin-right":"%v%n"
+            }
+        }
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["ml"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "margin-left":"%v%n"
+            }
+        }
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["mr"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "margin-right":"%v%n"
+            }
+        }
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["p"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "padding":"%v%n"
+            }
+        }
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["px"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "padding-left":"%v%n",
+                "padding-right":"%v%n"
+            }
+        } 
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["pl"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "padding-left":"%v%n"
+            }
+        } 
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["pr"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "padding-right":"%v%n"
+            }
+        } 
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["py"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "padding-top":"%v%n",
+                "padding-bottom":"%v%n"
+            }
+        }
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["pt"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "padding-top":"%v%n"
+            }
+        }
+    },
+    {
+        "method":"type-value-notation",
+        "parts":{
+            "type":["pb"],
+            "notation":["px", "em", "rem", ""],
+            "separators":["-"],
+            "defaultNotation":"px"
+        },
+        "binds":{
+            "default":{
+                "padding-bottom":"%v%n"
             }
         }
     }
